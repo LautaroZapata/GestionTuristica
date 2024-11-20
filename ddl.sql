@@ -1,4 +1,6 @@
-CREATE DATABASE GestionTuristica;
+CREATE DATABASE GestionTuristica2;
+go
+use GestionTuristica2
 go
 CREATE TABLE Bus(idBus INTEGER PRIMARY KEY IDENTITY,
 				marca VARCHAR(15),
@@ -7,9 +9,13 @@ CREATE TABLE Bus(idBus INTEGER PRIMARY KEY IDENTITY,
 				CONSTRAINT minMaxAsientos CHECK (capacidadAsientos <= 40 AND capacidadAsientos >= 10)
 )
 CREATE TABLE Asiento(idBus INTEGER ,
-				idAsiento VARCHAR(3) PRIMARY KEY,
-				CONSTRAINT FK_idBus FOREIGN KEY (idBus) REFERENCES Bus(idBus)
+				idAsiento INTEGER PRIMARY KEY IDENTITY,
+				fila VARCHAR(2),
+				CONSTRAINT FK_idBus FOREIGN KEY (idBus) REFERENCES Bus(idBus),
 )
+
+
+
 CREATE TABLE Departamento(idDepartamento INTEGER PRIMARY KEY IDENTITY ,
 				nombreDepartamento VARCHAR(15),
 )
@@ -23,7 +29,7 @@ CREATE TABLE Terminal(idTerminal INTEGER PRIMARY KEY IDENTITY ,
 				CONSTRAINT FK_terminalesDistintas CHECK (terminalOrigen <> terminalDestino) 
 )
 CREATE TABLE DestinoTuristico(identificadorDestino INTEGER PRIMARY KEY IDENTITY ,
-				fechaHoraSalida DATE,
+				fechaHoraSalida DATETIME,
 				duracionAproximada NUMERIC(3),
 				informacionGeneral VARCHAR(50),
 				importeDeViaje NUMERIC(4),
@@ -66,9 +72,9 @@ CREATE TABLE Pasaje(idPasaje INTEGER PRIMARY KEY IDENTITY ,
 				identificadorDestino INTEGER,
 				idFuncionario INTEGER,
 				idPasajero INTEGER,
+				idAsiento INTEGER
 				CONSTRAINT FK_FuncionarioPasaje FOREIGN KEY (idFuncionario) REFERENCES Funcionario(idFuncionario),
 				CONSTRAINT FK_DestinoTuristicoPasaje FOREIGN KEY (identificadorDestino) REFERENCES DestinoTuristico(identificadorDestino),
-				CONSTRAINT FK_TuristaPasaje FOREIGN KEY (idPasajero) REFERENCES Turista(idPasajero)
+				CONSTRAINT FK_TuristaPasaje FOREIGN KEY (idPasajero) REFERENCES Turista(idPasajero),
+				CONSTRAINT FK_Asiento FOREIGN KEY (idAsiento) REFERENCES Asiento(idAsiento)
 )
-
-ALTER TABLE DestinoTuristico ALTER COLUMN fechaHoraSalida DATETIME;
