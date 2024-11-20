@@ -8,9 +8,6 @@ CREATE TABLE Bus(idBus INTEGER PRIMARY KEY IDENTITY,
 )
 CREATE TABLE Asiento(idBus INTEGER ,
 				idAsiento VARCHAR(3) PRIMARY KEY,
-				marca VARCHAR(15),
-				capacidadAsientos VARCHAR(10),
-				tipo VARCHAR(10),
 				CONSTRAINT FK_idBus FOREIGN KEY (idBus) REFERENCES Bus(idBus)
 )
 CREATE TABLE Departamento(idDepartamento INTEGER PRIMARY KEY IDENTITY ,
@@ -24,16 +21,6 @@ CREATE TABLE Terminal(idTerminal INTEGER PRIMARY KEY IDENTITY ,
 				idDepartamento INTEGER,
 				CONSTRAINT FK_idDepartamento FOREIGN KEY (idDepartamento) REFERENCES Departamento(idDepartamento),
 				CONSTRAINT FK_terminalesDistintas CHECK (terminalOrigen <> terminalDestino) 
-)
-CREATE TABLE DestinoTuristico(identificadorDestino INTEGER PRIMARY KEY IDENTITY ,
-				fechaHoraSalida DATE,
-				duracionAproximada NUMERIC(3),
-				informacionGeneral VARCHAR(50),
-				importeDeViaje NUMERIC(4),
-				idBus INTEGER,
-				idTerminal INTEGER,
-				CONSTRAINT FK_idBusDestinoTuristico FOREIGN KEY (idBus) REFERENCES Bus(idBus),
-				CONSTRAINT FK_idTerminal FOREIGN KEY (idTerminal) REFERENCES Terminal(idTerminal)
 )
 CREATE TABLE DestinoTuristico(identificadorDestino INTEGER PRIMARY KEY IDENTITY ,
 				fechaHoraSalida DATE,
@@ -84,7 +71,4 @@ CREATE TABLE Pasaje(idPasaje INTEGER PRIMARY KEY IDENTITY ,
 				CONSTRAINT FK_TuristaPasaje FOREIGN KEY (idPasajero) REFERENCES Turista(idPasajero)
 )
 
-
-
-
-
+ALTER TABLE DestinoTuristico ALTER COLUMN fechaHoraSalida DATETIME;
