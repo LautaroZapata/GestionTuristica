@@ -18,7 +18,7 @@ FROM Turista t
 JOIN Pasaje p ON t.idPasajero = p.idPasajero
 JOIN Turista_TelefonosContacto tc ON t.idPasajero = tc.idPasajero
 GROUP BY t.idPasajero, t.email, t.esMercosur,t.fechaNacimiento, t.nroDocumento, t.nombreUsuario, t.pass, t.primerApellido, t.segundoApellido, t.primerNombre, tc.telefonosContacto
-HAVING COUNT(p.idPasaje) >= 5
+HAVING COUNT(p.idPasaje) > 5
 
 -- CONSULTA 4 Listar idpasajero, nombre, apellidos y asiento (idasiento y fila) que correspondan a pasajes comprados para el destino cuyo idviaje es 255.
 
@@ -38,7 +38,7 @@ SELECT p.idPasaje, COUNT(p.idPasaje) AS cantidadPasajes, t.email, p.fechaCompra
 FROM Pasaje p
 JOIN Turista t ON p.idPasajero = t.idPasajero
 GROUP BY p.idPasaje, t.email, p.fechaCompra
-HAVING p.fechaCompra  > '08/31/2017' AND p.fechaCompra <= '09/30/2017'	
+HAVING p.fechaCompra  > '08/31/2017' AND p.fechaCompra <= '09/30/2017' AND t.email = 'soyturista@gmail.com'
 
 
 

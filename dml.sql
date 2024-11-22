@@ -137,8 +137,9 @@ INSERT INTO Pasaje (fueUtilizado, fechaCompra, identificadorDestino, idFuncionar
 (1, '10/15/2024', 2, 2, 2, 15),  -- Pasaje 12
 (0, '10/15/2024', 3, 3, 5, 20),  -- Pasaje 13
 (1, '09/15/2017', 4, 4, 1, 1),   -- Pasaje 14 (Pasajero 1 repite)
-(0, '10/15/2024', 5, 5, 2, 5);   -- Pasaje 15
-
+(0, '10/15/2024', 5, 5, 2, 5),   -- Pasaje 15
+(1, '10/28/2024', 1, 1, 1, 5),   -- Pasaje 16 (Pasajero 1 repite)
+(1, '09/29/2017', 1, 2, 2, 3);	 -- Pasaje 17
 
 -- INSERT CON CHAT GPT PARA EL ID VIAJE 255
 
